@@ -3,6 +3,7 @@ import sqlite3
 from datetime import datetime, timedelta
 from pathlib import Path
 
+from config import RandomizeConfig
 from loguru import logger
 from pywintypes import Time
 from win32file import (
@@ -150,11 +151,31 @@ class FileTimestampManager:
         :param start_date: 开始时间，默认为当前年份的1月1日
         :param end_date: 结束时间，默认为当前年份的12月31日
         """
-        self.set_file_timestamps(
-            creation_time=self.get_randomized_date(start_date, end_date),
-            last_access_time=self.get_randomized_date(start_date, end_date),
-            last_write_time=self.get_randomized_date(start_date, end_date),
-        )
+        if RandomizeConfig.SAME_CAW:
+            # 创建时间 == 最后访问时间 == 最后修改时间
+            logger.debug("Randomizing file timestamps with SAME_CAW config")
+            creation_time: datetime = self.get_randomized_date(start_date, end_date)
+            last_access_time: datetime = creation_time
+            last_write_time: datetime = creation_time
+        elif RandomizeConfig.MORE_REALISTIC:
+            # 创建时间 <= 最后修改时间 <= 最后访问时间 <= 当前时间
+            logger.debug("Randomizing file timestamps with MORE_REALISTIC config")
+            creation_time: datetime = self.get_randomized_date(
+                start_date, datetime.now()
+            )
+            last_access_time: datetime = self.get_randomized_date(
+                creation_time, datetime.now()
+            )
+            last_write_time: datetime = self.get_randomized_date(
+                last_access_time, datetime.now()
+            )
+        else:
+            # 随机化所有时间戳
+            creation_time: datetime = self.get_randomized_date(start_date, end_date)
+            last_access_time: datetime = self.get_randomized_date(start_date, end_date)
+            last_write_time: datetime = self.get_randomized_date(start_date, end_date)
+
+        self.set_file_timestamps(creation_time, last_access_time, last_write_time)
 
     def get_randomized_date(
         self,
@@ -176,38 +197,37 @@ class FileTimestampManager:
 
 
 if __name__ == "__main__":
-    for i in range(50):
-        FileTimestampManager.db_path = Path(
-            r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test.db"
-        )
-        # 使用类设置文件时间戳
-        file_path = Path(
-            r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test.txt"
-        )
-        manager = FileTimestampManager(file_path)
+    FileTimestampManager.db_path = Path(
+        r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test.db"
+    )
 
-        manager.log_file_timestamps()  # 记录文件原始时间戳
+    file_path = Path(r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test.txt")
+    manager = FileTimestampManager(file_path)
 
-        # 随机化文件时间戳
-        # manager.randomize_file_timestamps()
+    manager.log_file_timestamps()  # 记录文件原始时间戳
 
-        # 指定时间范围随机化
-        manager.randomize_file_timestamps(datetime(1970, 1, 1, 0, 0, 0), datetime.now())
+    # 随机化文件时间戳
+    # manager.randomize_file_timestamps()
 
-        # 全部随机化为相同的时间戳
-        # random_date = manager.get_randomized_date(
-        #     start_date=datetime(2000, 1, 1, 0, 0, 0),
-        #     end_date=datetime(2000, 12, 31, 23, 59, 59),
-        # )
-        # manager.set_file_timestamps(
-        #     creation_time=random_date,
-        #     last_access_time=random_date,
-        #     last_write_time=random_date,
-        # )
+    # 指定时间范围随机化
+    manager.randomize_file_timestamps(
+        datetime(2012, 1, 1, 0, 0, 0), datetime(2077, 12, 31, 23, 59, 59)
+    )
 
-        # 指定时间戳
-        # manager.set_file_timestamps(
-        #     creation_time=datetime(2000, 1, 1, 0, 0, 0),
-        #     last_access_time=datetime(2000, 1, 1, 0, 0, 0),
-        #     last_write_time=datetime(2000, 1, 1, 0, 0, 0),
-        # )
+    # 全部随机化为相同的时间戳
+    # random_date = manager.get_randomized_date(
+    #     start_date=datetime(2000, 1, 1, 0, 0, 0),
+    #     end_date=datetime(2000, 12, 31, 23, 59, 59),
+    # )
+    # manager.set_file_timestamps(
+    #     creation_time=random_date,
+    #     last_access_time=random_date,
+    #     last_write_time=random_date,
+    # )
+
+    # 指定时间戳
+    # manager.set_file_timestamps(
+    #     creation_time=datetime(2000, 1, 1, 0, 0, 0),
+    #     last_access_time=datetime(2000, 1, 1, 0, 0, 0),
+    #     last_write_time=datetime(2000, 1, 1, 0, 0, 0),
+    # )
