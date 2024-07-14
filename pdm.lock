@@ -5,7 +5,18 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.2"
-content_hash = "sha256:882da2ab9d768299a5a76578e09017d8d8053cb3e64c97315c3f008af88eee84"
+content_hash = "sha256:9b663f93e24304d299b350718f6a23aeaa1fe56f9e318f5a66ece3c8f67b676e"
+
+[[package]]
+name = "ansi2html"
+version = "1.9.2"
+requires_python = ">=3.7"
+summary = "Convert text with ANSI color codes to HTML or to LaTeX"
+groups = ["default"]
+files = [
+    {file = "ansi2html-1.9.2-py3-none-any.whl", hash = "sha256:dccb75aa95fb018e5d299be2b45f802952377abfdce0504c17a6ee6ef0a420c5"},
+    {file = "ansi2html-1.9.2.tar.gz", hash = "sha256:3453bf87535d37b827b05245faaa756dbab4ec3d69925e352b6319c3c955c0a5"},
+]
 
 [[package]]
 name = "colorama"
