@@ -1,0 +1,20 @@
+[project]
+name = "TimeStamp-Randomizer"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "H1DDENADM1N", email = "65646535+H1DDENADM1N@users.noreply.github.com"},
+]
+dependencies = [
+    "pyside6==6.6.3.1",
+    "loguru>=0.7.2",
+    "gitignore-parser>=0.1.11",
+    "pywin32>=306",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "GPLv3"}
+
+
+[tool.pdm]
+distribution = false
