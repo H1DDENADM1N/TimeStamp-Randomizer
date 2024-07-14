@@ -2,11 +2,8 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
-from file_timestamp_manager import FileTimestampManager
 from loguru import logger
 from pywintypes import Time
-from utils.create_table import create_table
-from utils.get_randomized_timestamps import get_randomized_timestamps
 from win32con import (
     FILE_FLAG_BACKUP_SEMANTICS,
     FILE_SHARE_DELETE,
@@ -21,6 +18,10 @@ from win32file import (
     CreateFile,
     SetFileTime,
 )
+
+from .file_timestamp_manager import FileTimestampManager
+from .utils.create_table import create_table
+from .utils.get_randomized_timestamps import get_randomized_timestamps
 
 
 class FolderTimestampManager:
@@ -46,7 +47,7 @@ class FolderTimestampManager:
 
         return True
 
-    def log_folder_timestamp(self) -> None:
+    def log_folder_timestamps(self) -> None:
         """
         记录文件夹的创建时间戳。
         """
@@ -168,13 +169,3 @@ class FolderTimestampManager:
             start_date=start_date,
             end_date=end_date,
         )
-
-
-if __name__ == "__main__":
-    folder_path = Path(
-        r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test_folder"
-    )
-    manager = FolderTimestampManager(folder_path)
-    manager.log_folder_timestamp()
-    # manager.set_folder_timestamps()
-    manager.randomize_folder_timestamps()

@@ -1,6 +1,5 @@
-from datetime import datetime, timedelta
 import random
-from loguru import logger
+from datetime import datetime, timedelta
 
 
 def get_randomized_date(

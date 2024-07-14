@@ -1,7 +1,9 @@
-from .get_randomized_date import get_randomized_date
-from config import RandomizeConfig
 from datetime import datetime
+
 from loguru import logger
+
+from ..config import RandomizeConfig
+from .get_randomized_date import get_randomized_date
 
 
 def get_randomized_timestamps(

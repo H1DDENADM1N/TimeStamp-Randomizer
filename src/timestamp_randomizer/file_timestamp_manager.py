@@ -4,8 +4,6 @@ from pathlib import Path
 
 from loguru import logger
 from pywintypes import Time
-from utils.create_table import create_table
-from utils.get_randomized_timestamps import get_randomized_timestamps
 from win32con import (
     FILE_FLAG_BACKUP_SEMANTICS,
     FILE_SHARE_DELETE,
@@ -20,6 +18,9 @@ from win32file import (
     CreateFile,
     SetFileTime,
 )
+
+from .utils.create_table import create_table
+from .utils.get_randomized_timestamps import get_randomized_timestamps
 
 
 class FileTimestampManager:
