@@ -30,6 +30,6 @@ def test_folder_timestamp_manager():
 
 
 if __name__ == "__main__":
-    test_file_timestamp_manager()
+    # test_file_timestamp_manager()
     print("\n\n\n\n")
     test_folder_timestamp_manager()

@@ -1,6 +1,7 @@
 import sqlite3
 from datetime import datetime
 from pathlib import Path
+from turtle import st
 
 from loguru import logger
 from pywintypes import Time
@@ -113,8 +114,14 @@ class FolderTimestampManager:
         # 递归遍历文件夹
         for child in self.folder_path.iterdir():
             if child.is_dir():
-                self.set_folder_timestamps(
-                    child, creation_time, last_access_time, last_write_time
+                child_manager = FolderTimestampManager(child)
+                child_manager.log_folder_timestamps()
+                child_manager.set_folder_timestamps(
+                    creation_time,
+                    last_access_time,
+                    last_write_time,
+                    start_date=start_date,
+                    end_date=end_date,
                 )
             elif child.is_file():
                 child_manager = FileTimestampManager(child)
@@ -146,6 +153,7 @@ class FolderTimestampManager:
         finally:
             # 确保文件句柄被关闭
             CloseHandle(folder_handle)
+            logger.debug(f"Exiting set_folder_timestamps for {self.folder_path}")
 
     def randomize_folder_timestamps(
         self,
