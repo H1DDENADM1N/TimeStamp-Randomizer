@@ -68,6 +68,16 @@
        </widget>
       </item>
       <item>
+       <widget class="QCheckBox" name="checkBox_nine_to_five">
+        <property name="text">
+         <string>随机化的时间范围为 9:00 ~ 17:00</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QLabel" name="label">

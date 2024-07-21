@@ -35,6 +35,7 @@ class MainWindow(QWidget, Ui_Form):
         self.checkBox_more_realistic.stateChanged.connect(
             self.on_more_realistic_changed
         )
+        self.checkBox_nine_to_five.stateChanged.connect(self.on_nine_to_five_changed)
 
     def on_same_caw_changed(self):
         if self.checkBox_same_caw.isChecked():
@@ -52,6 +53,13 @@ class MainWindow(QWidget, Ui_Form):
         else:
             RandomizeConfig.MORE_REALISTIC = False
             self.init_end_date()
+
+    def on_nine_to_five_changed(self):
+        if self.checkBox_nine_to_five.isChecked():
+            # 随机化的时间范围为 9:00 ~ 17:00
+            RandomizeConfig.NINE_TO_FIVE = True
+        else:
+            RandomizeConfig.NINE_TO_FIVE = False
 
     def init_start_date(self):
         self.start_date: datetime = datetime(datetime.now().year, 1, 1, 0, 0, 0)

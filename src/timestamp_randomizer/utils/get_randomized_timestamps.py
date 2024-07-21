@@ -32,16 +32,13 @@ def get_randomized_timestamps(
         logger.debug("Randomizing file timestamps with MORE_REALISTIC config")
 
         now = datetime.now()
-        if start_date <= end_date <= now:
-            pass
-        if end_date > now:
-            end_date = now
-        if start_date > now:
-            start_date = now
-
+        creation_time: datetime = get_randomized_date(start_date, end_date)
         last_access_time: datetime = get_randomized_date(start_date, end_date)
-        last_write_time: datetime = get_randomized_date(start_date, last_access_time)
-        creation_time: datetime = get_randomized_date(start_date, last_write_time)
+        last_write_time: datetime = get_randomized_date(start_date, end_date)
+
+        creation_time, last_access_time, last_write_time, _ = sorted(
+            [creation_time, last_access_time, last_write_time, now]
+        )
     else:
         # 随机化所有时间戳
         creation_time: datetime = get_randomized_date(start_date, end_date)

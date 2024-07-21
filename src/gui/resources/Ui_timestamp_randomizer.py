@@ -65,6 +65,12 @@ class Ui_Form(object):
 
         self.verticalLayout.addWidget(self.checkBox_more_realistic)
 
+        self.checkBox_nine_to_five = QCheckBox(self.groupBox_2)
+        self.checkBox_nine_to_five.setObjectName(u"checkBox_nine_to_five")
+        self.checkBox_nine_to_five.setChecked(True)
+
+        self.verticalLayout.addWidget(self.checkBox_nine_to_five)
+
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.label = QLabel(self.groupBox_2)
@@ -131,6 +137,7 @@ class Ui_Form(object):
         self.groupBox_2.setTitle(QCoreApplication.translate("Form", u"\u8bbe\u7f6e\uff1a", None))
         self.checkBox_same_caw.setText(QCoreApplication.translate("Form", u"\u521b\u5efa\u65f6\u95f4 == \u6700\u540e\u8bbf\u95ee\u65f6\u95f4 == \u6700\u540e\u4fee\u6539\u65f6\u95f4", None))
         self.checkBox_more_realistic.setText(QCoreApplication.translate("Form", u"\u521b\u5efa\u65f6\u95f4 <= \u6700\u540e\u4fee\u6539\u65f6\u95f4 <= \u6700\u540e\u8bbf\u95ee\u65f6\u95f4 <= \u5f53\u524d\u65f6\u95f4", None))
+        self.checkBox_nine_to_five.setText(QCoreApplication.translate("Form", u"\u968f\u673a\u5316\u7684\u65f6\u95f4\u8303\u56f4\u4e3a 9:00 ~ 17:00", None))
         self.label.setText(QCoreApplication.translate("Form", u"\u968f\u673a\u8303\u56f4-\u8d77\u59cb\uff1a", None))
         self.dateTimeEdit_start_date.setDisplayFormat(QCoreApplication.translate("Form", u"yyyy/M/d H:mm:ss", None))
         self.label_2.setText(QCoreApplication.translate("Form", u"\u968f\u673a\u8303\u56f4-\u7ed3\u675f\uff1a", None))
