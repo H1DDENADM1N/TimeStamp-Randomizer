@@ -3,9 +3,12 @@
 
 [metadata]
 groups = ["default"]
-strategy = ["cross_platform", "inherit_metadata"]
-lock_version = "4.4.2"
-content_hash = "sha256:9b663f93e24304d299b350718f6a23aeaa1fe56f9e318f5a66ece3c8f67b676e"
+strategy = ["inherit_metadata"]
+lock_version = "4.5.0"
+content_hash = "sha256:d701567cc109b2e89d4fe8a00e0282fd306bc81d524d10b08460fbe1a2c36838"
+
+[[metadata.targets]]
+requires_python = "==3.12.*"
 
 [[package]]
 name = "ansi2html"
@@ -13,6 +16,10 @@ version = "1.9.2"
 requires_python = ">=3.7"
 summary = "Convert text with ANSI color codes to HTML or to LaTeX"
 groups = ["default"]
+dependencies = [
+    "importlib-metadata; python_version < \"3.8\"",
+    "typing-extensions; python_version < \"3.8\"",
+]
 files = [
     {file = "ansi2html-1.9.2-py3-none-any.whl", hash = "sha256:dccb75aa95fb018e5d299be2b45f802952377abfdce0504c17a6ee6ef0a420c5"},
     {file = "ansi2html-1.9.2.tar.gz", hash = "sha256:3453bf87535d37b827b05245faaa756dbab4ec3d69925e352b6319c3c955c0a5"},
@@ -31,21 +38,13 @@ files = [
 ]
 
 [[package]]
-name = "gitignore-parser"
-version = "0.1.11"
-summary = "A spec-compliant gitignore parser for Python 3.5+"
-groups = ["default"]
-files = [
-    {file = "gitignore_parser-0.1.11.tar.gz", hash = "sha256:fa10fde48b44888eeefac096f53bcdad9b87a4ffd7db788558dbdf71ff3bc9db"},
-]
-
-[[package]]
 name = "loguru"
 version = "0.7.2"
 requires_python = ">=3.5"
 summary = "Python logging made (stupidly) simple"
 groups = ["default"]
 dependencies = [
+    "aiocontextvars>=0.2.0; python_version < \"3.7\"",
     "colorama>=0.3.4; sys_platform == \"win32\"",
     "win32-setctime>=1.0.0; sys_platform == \"win32\"",
 ]

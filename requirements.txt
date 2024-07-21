@@ -7,8 +7,6 @@ ansi2html==1.9.2 \
 colorama==0.4.6; sys_platform == "win32" \
     --hash=sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44 \
     --hash=sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6
-gitignore-parser==0.1.11 \
-    --hash=sha256:fa10fde48b44888eeefac096f53bcdad9b87a4ffd7db788558dbdf71ff3bc9db
 loguru==0.7.2 \
     --hash=sha256:003d71e3d3ed35f0f8984898359d65b79e5b21943f78af86aa5491210429b8eb \
     --hash=sha256:e671a53522515f34fd406340ee968cb9ecafbc4b36c679da03c18fd8d0bd51ac
