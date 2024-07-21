@@ -1,4 +1,7 @@
 from dataclasses import dataclass
+from pathlib import Path
+
+DB_PATH: Path = Path("./logs.db")
 
 
 @dataclass()

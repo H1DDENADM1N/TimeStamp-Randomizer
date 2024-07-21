@@ -1,7 +1,6 @@
 import sqlite3
 from datetime import datetime
 from pathlib import Path
-from turtle import st
 
 from loguru import logger
 from pywintypes import Time
@@ -20,18 +19,17 @@ from win32file import (
     SetFileTime,
 )
 
+from .config import DB_PATH
 from .file_timestamp_manager import FileTimestampManager
 from .utils.create_table import create_table
 from .utils.get_randomized_timestamps import get_randomized_timestamps
 
 
 class FolderTimestampManager:
-    db_path = Path(r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test.db")
-
     def __init__(self, folder_path: Path):
         self.folder_path = folder_path
-        if not self.db_path.exists():
-            create_table(self.db_path)
+        if not DB_PATH.exists():
+            create_table(DB_PATH)
 
     def is_folder_exists(self) -> bool:
         """
@@ -71,7 +69,7 @@ class FolderTimestampManager:
         )
 
         # 记录文件夹时间戳到数据库
-        conn = sqlite3.connect(str(self.db_path))
+        conn = sqlite3.connect(str(DB_PATH))
         c = conn.cursor()
         c.execute(
             """INSERT INTO folder_timestamps (id, log_time, folder_path, creation_time, last_access_time, last_write_time) VALUES (?, ?, ?, ?, ?, ?)""",

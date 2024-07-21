@@ -21,15 +21,14 @@ from win32file import (
 
 from .utils.create_table import create_table
 from .utils.get_randomized_timestamps import get_randomized_timestamps
+from .config import DB_PATH
 
 
 class FileTimestampManager:
-    db_path = Path(r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test.db")
-
     def __init__(self, file_path: Path):
         self.file_path = file_path
-        if not self.db_path.exists():
-            create_table(self.db_path)
+        if not DB_PATH.exists():
+            create_table(DB_PATH)
 
     def is_file_exists(self) -> bool:
         """
@@ -69,7 +68,7 @@ class FileTimestampManager:
         )
 
         # 记录文件时间戳到数据库
-        conn = sqlite3.connect(str(self.db_path))
+        conn = sqlite3.connect(str(DB_PATH))
         c = conn.cursor()
         c.execute(
             """INSERT INTO file_timestamps (id, log_time, file_path, creation_time, last_access_time, last_write_time) VALUES (?,?,?,?,?,?)""",
@@ -147,7 +146,7 @@ class FileTimestampManager:
 
 
 if __name__ == "__main__":
-    FileTimestampManager.db_path = Path(
+    FileTimestampManager.DB_PATH = Path(
         r"C:\Users\user0\Documents\TimeStamp-Randomizer\tests\test.db"
     )
 

@@ -6,6 +6,9 @@ def create_table(db_path: Path):
     """
     创建数据库表用于记录文件时间戳。
     """
+    if not db_path.exists():
+        db_path.parent.mkdir(parents=True, exist_ok=True)
+
     conn = sqlite3.connect(str(db_path))
     c = conn.cursor()
     c.execute(
